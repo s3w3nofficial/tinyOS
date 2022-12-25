@@ -1,5 +1,6 @@
 #include "print.h"
 #include "gdt.h"
+#include "interrupts.h"
 #include <stdint.h>
 
 void kernel_main() {
@@ -10,4 +11,8 @@ void kernel_main() {
   print_newline();
 
   GlobalDescriptorTable * gdt = gdt_init();
+
+  init_interrupt_manager(*gdt);
+
+  activate();
 }

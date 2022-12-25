@@ -4,8 +4,8 @@ GlobalDescriptorTable * gdt_init() {
 
     SegmentDescriptor nullSegmentSelector = segment_descriptor_init(0, 0, 0);
     SegmentDescriptor unusedSegmentSelector = segment_descriptor_init(0, 0, 0);
-    SegmentDescriptor codeSegmentSelector = segment_descriptor_init(0, 64*1024*1023, 0x9A);
-    SegmentDescriptor dataSegmentSelector = segment_descriptor_init(0, 64*1024*1023, 0x92);
+    SegmentDescriptor codeSegmentSelector = segment_descriptor_init(0, 64*1024*1024, 0x9A);
+    SegmentDescriptor dataSegmentSelector = segment_descriptor_init(0, 64*1024*1024, 0x92);
 
     GlobalDescriptorTable gdt = {
         .nullSegmentSelector = nullSegmentSelector,
@@ -15,7 +15,7 @@ GlobalDescriptorTable * gdt_init() {
     };
 
     uint32_t i[2];
-    //i[0] = (uint32_t)gdt;
+    i[0] = (uint32_t)&gdt;
     i[1] = sizeof(GlobalDescriptorTable) << 16;
 
     asm volatile("lgdt (%0)": :"p" (((uint8_t *) i) + 2));
