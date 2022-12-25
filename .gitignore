@@ -1,3 +1,4 @@
 boot/kernel.bin
 dist/
 build/
+targets/iso/boot/grub
