@@ -1,4 +1,4 @@
 boot/kernel.bin
 dist/
 build/
-targets/iso/boot/grub
+targets/x86_64/iso/boot/kernel.bin
